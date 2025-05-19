@@ -1,0 +1,25 @@
+import React, { JSX } from "react";
+import { IconProps } from "../utils/IconProps";
+
+export const IconChevronDownActive = ({
+  size = "30",
+  color = "currentColor",
+  className = "",
+}: IconProps): JSX.Element => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      className={`icon ${className}`}
+      viewBox="0 0 30 30"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width={size} height={size} rx="4" fill={color} />
+      <path
+        d="M23.3644 10.8182L22.6774 10.1067C22.4966 9.96443 22.2073 9.96443 22.0627 10.1067L15.5181 16.5455L8.93729 10.1067C8.79265 9.96443 8.50339 9.96443 8.3226 10.1067L7.63559 10.8182C7.4548 10.996 7.4548 11.2451 7.63559 11.4229L15.1927 18.8933C15.3734 19.0356 15.6266 19.0356 15.8073 18.8933L23.3644 11.4229C23.5452 11.2451 23.5452 10.996 23.3644 10.8182Z"
+        fill="white"
+      />
+    </svg>
+  );
+};

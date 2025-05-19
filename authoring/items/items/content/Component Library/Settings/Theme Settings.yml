@@ -1,0 +1,26 @@
+﻿---
+ID: "1d568435-b65e-4eff-8e4f-d72cfaed6609"
+Parent: "650c3fbe-f294-4dab-a3ae-350639a1ec44"
+Template: "f5a83a0e-5eab-441d-83a6-1357e4c8d03b"
+Path: /sitecore/content/Catalyst/Component Library/Settings/Theme Settings
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20220825T204310Z
+    - ID: "2abe864b-e7de-4494-b7d1-7bfe529bf007"
+      Hint: Theme
+      Value: "{3F711708-CFE4-4BAA-94B4-67C575A0B5B2}"
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "93bea762-1e05-4a58-bb98-94c490f1d73c"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20221221T124603Z
