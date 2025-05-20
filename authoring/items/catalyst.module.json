@@ -7,8 +7,16 @@
         "path": "/sitecore/system/Modules/PowerShell/Script Library/Catalyst"
       },
       {
+        "name": "renderings",
+        "path": "/sitecore/layout/Renderings/Feature/Catalyst"
+      },
+      {
         "name": "templates-foundation",
         "path": "/sitecore/templates/Foundation/Catalyst"
+      },
+      {
+        "name": "templates-feature",
+        "path": "/sitecore/templates/Feature/Catalyst"
       },
       {
         "name": "templates",
@@ -36,7 +44,7 @@
       },
       {
         "name": "content",
-        "path": "/sitecore/content/Catalyst/Component Library"
+        "path": "/sitecore/content/Catalyst"
       }
     ]
   }

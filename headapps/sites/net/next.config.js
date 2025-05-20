@@ -27,6 +27,7 @@ const nextConfig = {
   // can be served from the Next.js Image Optimization API
   // see https://nextjs.org/docs/app/api-reference/components/image#remotepatterns
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -38,6 +39,24 @@ const nextConfig = {
         hostname: 'xmc-*.**',
         port: '',
       },
+      {
+        protocol: 'http',
+        hostname: 'bayer-local-*',
+        port: '',
+        pathname:'/**'
+      },
+      {
+        protocol: 'https',
+        hostname: '*.vercel.app',
+        port: '',
+        pathname:'/**'
+      },
+      {
+        protocol: 'https',
+        hostname: '*.sitecore.io',
+        port: '',
+        pathname: '/**',
+      }
     ],
   },
 
