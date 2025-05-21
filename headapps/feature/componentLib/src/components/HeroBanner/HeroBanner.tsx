@@ -22,33 +22,12 @@ export type HeroBannerProps = ComponentProps & {
     Title?: TextField;
     Subtitle?: TextField;
     Button?: LinkField;
-    MobileImage?: ImageField;
-    TabletImage?: ImageField;
-    DesktopImage?: ImageField;
-    DarkMode?: Field<boolean>;
-    FilledBox?: Field<boolean>;
-    MobilePosition?: Field<string>;
-    Position?: Field<string>;
+    Image?: ImageField;
     Video?: FileField;
   };
 };
 
 export const HeroBanner = ({ fields }: HeroBannerProps): JSX.Element => {
-  let variants =
-    fields.Position?.value == "center"
-      ? "-centered"
-      : fields.Position?.value == "right"
-      ? "-reverse"
-      : "";
-  variants += fields.DarkMode?.value ? " -darkMode" : "";
-  variants += fields.FilledBox?.value ? " -filledBox" : "";
-  variants +=
-    fields.MobilePosition?.value == "top"
-      ? " -mobile-top"
-      : fields.MobilePosition?.value == "bottom"
-      ? " -mobile-bottom"
-      : "";
-
   let background;
 
   if (fields.Video?.value) {
@@ -58,19 +37,19 @@ export const HeroBanner = ({ fields }: HeroBannerProps): JSX.Element => {
         autoPlay
         loop
         muted
-        poster={fields.DesktopImage?.value?.src}
+        poster={fields.Image?.value?.src}
       >
         <source src="/windex_light-is-life.mp4" type="video/mp4" />
       </video>
     );
   } else {
     background = (
-      <NextImage field={fields.DesktopImage} layout="responsive" />
+      <NextImage field={fields.Image} layout="responsive" />
     );
   }
 
   return (
-    <section className={`hero-banner ${variants}`}>
+    <section className={`hero-banner `}>
       <p>Hero Banner</p>
       <div className="hero-banner--background">{background}</div>
       <div className="hero-banner--content">

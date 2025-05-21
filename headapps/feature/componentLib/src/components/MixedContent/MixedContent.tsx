@@ -32,7 +32,6 @@ export type MixedContentProps = ComponentProps & {
     Subtitle: Field<string>;
     Image?: ImageField;
     Buttons?: Array<LinkListItem>;
-    Centered?: Field<boolean>;
   };
 };
 
@@ -65,7 +64,7 @@ export const DefaultVariant = (props: MixedContentProps): JSX.Element => {
   if (props.fields) {
     return (
       <section
-        className={`mixed-content ${props.fields.Centered && props.fields.Centered.value ? "-centered" : ""}`}
+        className={`mixed-content `}
       >
         <div
           className="mixed-content--container"
@@ -116,8 +115,7 @@ export const InvertedVariant = (props: MixedContentProps): JSX.Element => {
   if (props.fields) {
     return (
       <section
-        className={`mixed-content -inverted
-          ${props.fields.Centered && props.fields.Centered.value ? "-centered" : ""}`}
+        className={`mixed-content -inverted`}
       >
         <div
           className="mixed-content--container"
