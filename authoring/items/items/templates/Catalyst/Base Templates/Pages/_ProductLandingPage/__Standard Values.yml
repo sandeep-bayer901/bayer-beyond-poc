@@ -1,0 +1,23 @@
+﻿---
+ID: "2ed0a2a2-304d-444d-9776-4d91d3958335"
+Parent: "c8569342-1f50-494b-bc55-a714d3d48190"
+Template: "c8569342-1f50-494b-bc55-a714d3d48190"
+Path: /sitecore/templates/Project/Catalyst/Base Templates/Pages/_ProductLandingPage/__Standard Values
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20220810T201720Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "a143c70b-71f7-46cd-bb81-ffbb3ef25a8c"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\Admin
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20220810T201720Z

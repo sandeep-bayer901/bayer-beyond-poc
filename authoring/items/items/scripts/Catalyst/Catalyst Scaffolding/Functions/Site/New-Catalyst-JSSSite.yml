@@ -1,0 +1,309 @@
+﻿---
+ID: "ff1cfef8-b396-4d43-ae42-c0efcc2050de"
+Parent: "81b95bdd-5156-4c7c-946d-d0e4bf0150c4"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Catalyst/Catalyst Scaffolding/Functions/Site/New-Catalyst-JSSSite"
+SharedFields:
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    function New-Catalyst-JSSSite {
+            [CmdletBinding()]
+            param(
+                [Parameter(Mandatory = $true, Position = 0)]
+                [Sitecore.XA.JSS.Foundation.Scaffolding.Models.CreateNewJSSSiteModel]$Model,
+                
+                [Parameter(Mandatory = $true, Position = 1 )]
+                [Bool]$Blueprint
+            )
+    
+            begin {
+                Write-Verbose "Cmdlet New-JSSSite - Begin"
+                Import-Function Invoke-SiteAction
+                Import-Function Get-SiteMediaItem
+                Import-Function New-MappingString
+                Import-Function Get-SortedSetupItemsCollection
+                Import-Function Get-TenantItem
+                Import-Function Get-DataItem
+                Import-Function Get-TenantTemplate
+                Import-Function Set-TenantTemplate
+                Import-Function Invoke-PostSetupStep
+                Import-Function Get-SettingsItem
+                Import-Function Get-Action
+                Import-Function Test-ItemIsSiteDefinition
+                Import-Function Add-SiteMediaLibrary
+                Import-Function Get-ItemByIdSafe
+                Import-Function Get-ProjectTemplateBasedOnBaseTemplate
+                Import-Function Select-InheritingFrom
+            }
+    
+            process {
+                Write-Verbose "Cmdlet New-JSSSite - Process"
+                New-UsingBlock (New-Object Sitecore.Data.BulkUpdateContext) {
+                    if ($Model.SiteName -and $Model.DefinitionItems) {
+                        New-UsingBlock ([Sitecore.Configuration.SettingsSwitcher]::new("Sitecore.ThumbnailsGeneration.Enabled", $false)) {
+                            [string]$SiteName = $Model.SiteName
+                            [Item[]]$DefinitionItems = Get-SortedSetupItemsCollection $Model.DefinitionItems
+                            [string]$language = $Model.Language
+                            [string[]]$languages = $Model.Languages
+                            [string]$hostName = $Model.HostName
+                            [string]$virtualFolder = $Model.VirtualFolder
+                            [Item]$SiteLocation = $Model.SiteLocation
+    
+                            Write-Verbose "Cmdlet Add-Site - Process"
+                            Write-Verbose "Creating site ($SiteName) under: $($SiteLocation.Paths.Path)"
+                            Write-Verbose "Definitions items count: $($DefinitionItems.Length)"                        
+                            $siteBranch = $(if ($Blueprint) { "/sitecore/templates/Branches/Project/Catalyst/Scaffolding/Catalyst Blueprint Site" } else { "Branches/Project/Catalyst/Scaffolding/Catalyst Site" } )
+    
+                            Write-Progress -Activity ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::CreatingNewSite)) -CurrentOperation ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::GettingTenantItem)) -PercentComplete 0
+                            $tenant = Get-TenantItem $SiteLocation
+                            $tenantTemplatesRootID = $tenant.Fields['Templates'].Value
+                            $tenantTemplatesRoot = Get-Item -Path master: -ID $tenantTemplatesRootID
+                        
+                            Write-Progress -Activity ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::CreatingNewSite)) -CurrentOperation ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::GettingTenantTemplates)) -PercentComplete 10
+                            $tenantTemplates = Get-TenantTemplate $tenantTemplatesRoot
+                            $site = New-Item -Parent $SiteLocation -Name $SiteName -ItemType $siteBranch -Language $language
+    
+                            Write-Progress -Activity ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::CreatingNewSite)) -CurrentOperation ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::SettingTenantTemplatesLocation)) -PercentComplete 15
+                            Set-TenantTemplate $site $tenantTemplates
+                        
+                            Write-Progress -Activity ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::CreatingNewSite)) -CurrentOperation ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::CreatingSiteMediaLibrary)) -PercentComplete 20
+                            $siteMediaLibrary = Add-SiteMediaLibrary $Site
+                            $site.SiteMediaLibrary = $siteMediaLibrary.ID
+                            (Get-SiteMediaItem $site).AdditionalChildren = $siteMediaLibrary.ID, $tenant.SharedMediaLibrary -join "|"
+                        
+                            $settingsItem = Get-SettingsItem $Site
+                            $settingsItem.LayoutPath = Get-ItemByIdSafe "{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}"
+                            $settingsItem.RenderingsPath = Get-ItemByIdSafe $tenant.RenderingsFolder
+                            $settingsItem.PlaceholdersPath = Get-ItemByIdSafe $tenant.PlaceholderSettingsFolder
+                            $settingsItem.AppDatasourcesPath = Get-DataItem $site
+                            $settingsItem.DictionaryPath = $site.Children["Dictionary"]
+                            $settingsItem.DictionaryDomain = $site.Children["Dictionary"]
+                            [Sitecore.Data.ID]$jssPageTemplateID = [Sitecore.XA.JSS.Foundation.Multisite.Templates+JSSPage]::ID
+                            [Sitecore.Data.ID]$jssSiteTemplateID = [Sitecore.XA.JSS.Foundation.Multisite.Templates+JSSSite]::ID
+                            $settingsItem.AppTemplate = Get-ProjectTemplateBasedOnBaseTemplate $TenantTemplates $jssSiteTemplateID | Select-Object -First 1
+                            $settingsItem.FilesystemPath = "/dist/$SiteName"
+                            $settingsItem.Templates = $tenant.Templates
+                            $settingsItem.EditingTheme = '{3BCAB9EF-1E4F-4C23-B452-783BB82AA686}'
+                            $settingsItem.ServerSideRenderingEngine = "http"
+                            if ($null -eq $languages) {
+                                $languages = @($language)
+                            }
+                            $settingsItem.SupportedLanguages = (Get-ChildItem -path "/sitecore/system/Languages" | ? { $languages -contains $_.Name } | % { $_.id }) -join "|"
+                        
+                            $settingsItem.Editing.BeginEdit()
+                            $Model.SiteSettings.AllKeys | % {
+                                $settingsItem.Fields[$_].Value = $Model.SiteSettings[$_]
+                            }
+                            $settingsItem.Editing.EndEdit() > $null
+    
+                            try {
+                                $percentage_start = 35
+                                $percentage_end = 85
+                                $percentage_diff = $percentage_end - $percentage_start
+                                $Items = Get-ChildItem -Path $site.Paths.Path -Recurse
+                                foreach ($definitionItem in $DefinitionItems) {
+                                    $currentIndex = $DefinitionItems.IndexOf($definitionItem)
+                                    $percentComplete = ($percentage_start + 1.0 * $percentage_diff * ($currentIndex) / ($DefinitionItems.Count))
+                                    $currentOperation = $([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::InstallingFeature)) -f $definitionItem._Name
+                                    Write-Progress -Activity ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::CreatingNewSite)) -CurrentOperation ($currentOperation) -PercentComplete $percentComplete
+                                    $actions = $definitionItem | Get-Action
+                                    foreach ($actionItem in $actions) {
+                                        Invoke-SiteAction $site $actionItem -EditingTheme $editingTheme -language $language
+                                    }
+                                }
+                            } catch {
+                                Write-Error "An error occurred: $_"
+                                Write-Error "Exception Message: $($_.Exception.Message)"
+                                Write-Error "Stack Trace: $($_.Exception.StackTrace)"
+                            }                    
+    
+                            Write-Progress -Activity ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::CreatingNewSite)) -CurrentOperation ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::SettingDefaultValues)) -PercentComplete 90
+                            
+                            $_metaDescriptionField = [Sitecore.XA.JSS.Foundation.Multisite.Templates+Metadata+_Description]::ID
+                            $_metaNameField = [Sitecore.XA.JSS.Foundation.Multisite.Templates+Metadata+_Name]::ID
+                            $defaultDeviceID = "{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+                        
+                            Write-Progress -Activity ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::CreatingNewSite)) -CurrentOperation ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::ConfiguringSiteDefinitionItem)) -PercentComplete 93
+                            
+                            if (-not $Blueprint) {
+                                $siteDefinitionItem = Get-ChildItem -Recurse -Path ($settingsItem.Paths.Path) -Language $language | ? { (Test-ItemIsSiteDefinition $_) -eq $true } | Select-Object -First 1
+                        
+                                $siteDefinitionItem.HostName = $hostName
+                                $siteDefinitionItem.VirtualFolder = $virtualFolder
+                                $siteDefinitionItem.RenderingHost = "Default"
+                                $siteDefinitionItem.POS = $Model.POS
+                                $siteDefinitionItem.ThumbnailsRootPath = $siteMediaLibrary.ID
+                                $siteDefinitionItem.Editing.BeginEdit()
+                                $siteDefinitionItem.Fields["Language"].Value = $language
+                                $siteDefinitionItem.Fields.ReadAll()
+                                if ($siteDefinitionItem.Fields.Contains($_metaNameField)) {
+                                    $siteDefinitionItem.Fields[$_metaNameField].Value = $Model.DisplayName
+                                }
+                                if ($siteDefinitionItem.Fields.Contains($_metaDescriptionField)) {
+                                    $siteDefinitionItem.Fields[$_metaDescriptionField].Value = $Model.Description
+                                }
+                                $siteDefinitionItem.Editing.EndEdit() >> $null
+                                    
+                                $site.Editing.BeginEdit()
+                                $site.Fields.ReadAll()
+                                if ($site.Fields.Contains($_metaNameField)) {
+                                    $site.Fields[$_metaNameField].Value = $Model.DisplayName
+                                }
+                                if ($site.Fields.Contains($_metaDescriptionField)) {
+                                    $site.Fields[$_metaDescriptionField].Value = $Model.Description
+                                }
+                                $site.Editing.EndEdit() >> $null
+                                if ([string]::IsNullOrWhiteSpace($siteDefinitionItem.SiteName) -or ("`$name" -eq $siteDefinitionItem.SiteName)) {
+                                    $siteDefinitionItem.SiteName = $siteDefinitionItem.Name
+                                }
+                        
+                                if ([string]::IsNullOrWhiteSpace($siteDefinitionItem.Environment)) {
+                                    $siteDefinitionItem.Environment = "*"
+                                }
+                            
+                                $homeItem = Get-ProjectTemplateBasedOnBaseTemplate $TenantTemplates ($jssPageTemplateID.ToString()) | % {
+                                    $appRouteTemplate = $_
+                                    Get-ChildItem -Path ($Site.Paths.Path) | ? { $_.TemplateID -eq $appRouteTemplate.ID } | Select-Object -First 1
+                                }  | Select-Object -First 1
+                            
+                                if ($homeItem) {
+                                    $siteDefinitionItem.StartItem = $homeItem.ID    
+                                }
+                            }
+                        
+                            Write-Progress -Activity ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::CreatingNewSite)) -CurrentOperation ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::SettingTenantTemplatesLocation)) -PercentComplete 97
+                            Set-TenantTemplate $site $tenantTemplates
+                            
+                            Write-Progress -Activity ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::CreatingNewSite)) -CurrentOperation ("Creating Site Theme Item") -PercentComplete 99
+                            #Add Catalyst theme
+                            Add-CatalystTheme $SiteName $settingsItem $Model.ThemeName
+                    
+                            $site = $site.Database.GetItem($site.ID, $site.Language) | Wrap-Item
+                            $site.Modules = $DefinitionItems.ID -join "|"   
+                            $site.SiteTemplate = $Model.CustomData[[Sitecore.XA.Foundation.Scaffolding.Templates+SolutionTemplate]::ID]         
+    
+                            Invoke-PostSetupStep $Model.DefinitionItems $Model
+                        } >> $null
+    
+                        if ([Sitecore.Configuration.Settings]::GetSetting('Sitecore.ThumbnailsGeneration.Enabled') -eq "true") {
+                            $path = Join-Path $Model.SiteLocation.Paths.Path $Model.SiteName
+                            $homeItem = Get-ChildItem -Path $path -Language $Model.Language | Select-InheritingFrom ([Sitecore.XA.Foundation.Multisite.Templates+Page]::ID.ToString()) | Select-Object -First 1
+                            if ($homeItem) {
+                                $homeItem.__Revision = [System.Guid]::NewGuid()
+                                Get-ChildItem -Path $homeItem.Paths.Path -Language $Model.Language -Recurse | Select-InheritingFrom ([Sitecore.XA.Foundation.Multisite.Templates+Page]::ID.ToString()) | % {
+                                    $_.__Revision = [System.Guid]::NewGuid()
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        Write-Error "Could not create site. Site name or module definitions is undefined"
+                    }
+                }
+            }
+            end {
+                Write-Progress -Activity ([Sitecore.Globalization.Translate]::Text([Sitecore.XA.Foundation.Scaffolding.Texts]::YourSiteHasBeenCreated)) -CurrentOperation "" -PercentComplete 100
+                Write-Verbose "Cmdlet New-JSSSite - End"
+            }
+        }
+    
+    
+    
+        function Add-JSSSiteFolder {
+            [CmdletBinding()]
+            param(
+                [Parameter(Mandatory = $true, Position = 0 )]
+                [Item]$Site,
+    
+                [Parameter(Mandatory = $true, Position = 1 )]
+                [Item]$Tenant,
+    
+                [Parameter(Mandatory = $true, Position = 2 )]
+                [Item]$Parent,
+    
+                [Parameter(Mandatory = $true, Position = 3 )]
+                [string]$Template
+            )
+    
+            begin {
+                Write-Verbose "Cmdlet Add-JSSSiteFolder - Begin"
+                Import-Function Add-FolderStructure
+            }
+    
+            process {
+                if ($Parent) {
+                    $siteTail = $Site.Paths.Path.Replace($Tenant.Paths.Path, "")
+                    $path = $Parent.Paths.Path + $siteTail
+                    Add-FolderStructure $path $Template
+                }
+            }
+    
+            end {
+                Write-Verbose "Cmdlet Add-JSSSiteFolder - End"
+            }
+        }
+        # Catalyst Themes assignment
+        function Add-CatalystTheme {
+            [CmdletBinding()]
+            param(
+                [Parameter(Mandatory = $true, Position = 0 )]
+                [string]$SiteName,
+    
+                [Parameter(Mandatory = $true, Position = 1 )]
+                [Item]$SettingItem,
+    
+                [Parameter(Position = 2 )]
+                [string]$Theme
+            )
+    
+            begin {
+                Write-Verbose "Cmdlet Add-CatalystTheme - Begin"
+            }
+    
+            process {
+                #When theme is not selected create new one
+                if ([string]::IsNullOrEmpty($Theme)) {
+                    $ThemeItem = New-Item -Path "master:\sitecore\system\Settings\Foundation\Catalyst\Theming" -Name $SiteName -ItemType "{C9AFBDDC-954B-4404-9A88-12E3DEDBA816}"
+                    $Theme = $ThemeItem.ID.ToString()
+                }
+                #Get theme setting item and setting theme value
+                $ThemeSettingItem = Get-Item -Path "master:$($SettingItem.Paths.FullPath)\Theme Settings"
+                $ThemeSettingItem.Editing.BeginEdit()
+                $ThemeSettingItem.Fields["Theme"].Value = $Theme
+                $ThemeSettingItem.Editing.EndEdit() >> $null
+            }
+    
+            end {
+                Write-Verbose "Cmdlet Add-CatalystTheme - End"
+            }
+        }
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "9697e3c4-0e96-4bb7-9249-c84872e62b4d"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20221127T003500Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\ramkumar.nambhi@valtech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\ramkumar.nambhi@valtech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "4abfce0a-a060-4e8f-86d4-7b1de9c6350d"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\ramkumar.nambhi@valtech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250506T135426Z

@@ -1,0 +1,9 @@
+{
+	"extends": "./tsconfig.base.json",
+	"compilerOptions": {
+	  "jsx": "react",
+	  "lib": ["dom", "ES2015"],
+	  "module": "ESNext",
+	  "target": "ES2020",
+	}
+  }
