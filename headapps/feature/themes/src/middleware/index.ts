@@ -1,1 +1,0 @@
-export { ThemeMiddleware, THEME_KEY } from './theme-middleware'
