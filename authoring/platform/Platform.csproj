@@ -73,8 +73,10 @@
   <ItemGroup>
     <Folder Include="App_Config\Include\" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Data\**" />
+  <ItemGroup>    
+    <Content Include="App_Data\xdts\Web.config.xdt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
