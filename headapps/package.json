@@ -1,6 +1,6 @@
 {
     "name": "catalyst",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "private": true,
     "workspaces": [
         "sites/*",
@@ -12,7 +12,7 @@
         "storybook": "turbo run storybook",
         "start": "turbo run start",
         "start:production": "cd ./sites/corp && npm install --prefix=../.. -loglevel info && cd ../.. && npx turbo run build --filter=app-corp && turbo run start",
-        "start:corp": "cd ./sites/corp && npm install --prefix=../.. -loglevel info && cd ../.. && npx turbo run build --filter=app-corp && turbo run start && cd ./sites/corp && npm run next:start",
+        "start:corp": "cd ./sites/corp && npm install --prefix=../.. -loglevel info && cd ../.. && npx turbo run build --filter=app-corp && turbo run start --filter=app-corp",
         "start:net": "cd ./sites/net && npm install --prefix=../.. -loglevel info && cd ../.. && npx turbo run build --filter=app-net && turbo run start && cd ./sites/net && npm run next:start",
         "bootstrap": "turbo run bootstrap"
     },
@@ -20,10 +20,10 @@
         "turbo": "1.5.5"
     },
     "dependencies": {
-        "@catalyst/app-corp": "^1.0.0",
-        "@catalyst/app-net": "^1.0.0",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
+        "@catalyst/app-corp": "^0.1.1",
+        "@catalyst/app-net": "^1.1.0",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
         "rimraf": "^6.0.1"
     }
 }

@@ -1,9 +1,8 @@
-import React from "react";
+import React, { JSX } from "react";
 import {
-  Text,
   Field,
   ImageField,
-  NextImage,
+  Image,
   ComponentParams, 
   ComponentRendering,
   LinkField
@@ -42,7 +41,7 @@ export const MixedContentDefaultComponent = (props: MixedContentProps): JSX.Elem
     <div
       className="mixed-content--container">
         <div className="mixed-content--image-wrapper">
-          <NextImage layout="intrinsic" />
+          <Image />
         </div>
       <div className="mixed-content--content">
         <h2 className="mixed-content--title">{props.fields?.Title?.value}</h2>
@@ -74,10 +73,9 @@ export const DefaultVariant = (props: MixedContentProps): JSX.Element => {
         >
           {props.fields.Image && (
             <div className="mixed-content--image-wrapper">
-              <NextImage
+              <Image
                 field={props.fields.Image}
                 className="mixed-content--image"
-                layout="intrinsic"
               />
             </div>
           )}
@@ -125,11 +123,9 @@ export const InvertedVariant = (props: MixedContentProps): JSX.Element => {
         >
           {props.fields.Image && (
             <div className="mixed-content--image-wrapper">
-              <NextImage
+              <Image
                 field={props.fields.Image}
                 className="mixed-content--image"
-                layout="intrinsic"
-
               />
             </div>
           )}

@@ -1,16 +1,15 @@
 import {
   ComponentParams, 
   ComponentRendering,
-  Field,
   ImageField,
   LinkField,
   FileField,
-  NextImage,
   TextField,
+  Image
 } from '@sitecore-content-sdk/nextjs';
 import { IconArrowRight } from "@catalyst/foundation-icons";
 import { Button } from "@catalyst/foundation-global";
-import React from 'react';
+import React, { JSX } from 'react';
 
 interface ComponentProps {
     rendering: ComponentRendering & { params: ComponentParams };
@@ -44,7 +43,7 @@ export const HeroBanner = ({ fields }: HeroBannerProps): JSX.Element => {
     );
   } else {
     background = (
-      <NextImage field={fields.Image} layout="responsive" />
+      <Image field={fields.Image} style={{ objectFit: 'cover' }} />
     );
   }
 

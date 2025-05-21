@@ -32,54 +32,70 @@ export class ThemeMiddleware extends MiddlewareBase {
   }
 
   handle = async (req: NextRequest, res: NextResponse): Promise<NextResponse> => {
-    debug.common('Entering Themes Middleware');
-    debug.common('Middleware: Site KEY', SITE_KEY);
-
-    let siteName: string;
-    const hostname = this.getHostHeader(req) || this.defaultHostname;
-    const isSitecorePreview = req.cookies.get(PREVIEW_KEY)?.value;
-
-      if (isSitecorePreview) {
-        // This cookie is required to be set in the Sitecore Preview mode
-        siteName = req.cookies.get(SITE_KEY)?.value!;
-      } else {
-        // Site name can be forced by query string parameter or cookie
-        siteName =
-          req.nextUrl.searchParams.get(SITE_KEY) ||
-          (this.config.useCookieResolution &&
-            this.config.useCookieResolution(req) &&
-            req.cookies.get(SITE_KEY)?.value) ||
-          this.siteResolver.getByHost(hostname).name;
-      }
-
-    debug.common('Middleware: Site Name', siteName);
-
-    if (!siteName) {
+    if (!this.config.enabled) {
+      debug.common('skipped (themes middleware is disabled globally)');
       return res;
     }
 
-    const theme = this.config.themes.find((t) => t.name === siteName)?.theme || 'base';
-    debug.common('Middleware: theme', theme);
+    try {
+      debug.common('Entering Themes Middleware');
+      debug.common('Middleware: Site KEY', SITE_KEY);
 
-    if (!theme) {
-        console.warn(`ThemeMiddleware: No theme found for site '${siteName}'.`);
+      let siteName: string;
+      const hostname = this.getHostHeader(req) || this.defaultHostname;
+      const isSitecorePreview = req.cookies.get(PREVIEW_KEY)?.value;
+
+        if (isSitecorePreview) {
+          // This cookie is required to be set in the Sitecore Preview mode
+          siteName = req.cookies.get(SITE_KEY)?.value!;
+        } else {
+          // Site name can be forced by query string parameter or cookie
+          siteName =
+            req.nextUrl.searchParams.get(SITE_KEY) ||
+            (this.config.useCookieResolution &&
+              this.config.useCookieResolution(req) &&
+              req.cookies.get(SITE_KEY)?.value) ||
+            this.siteResolver.getByHost(hostname).name;
+        }
+
+      debug.common('Middleware: Site Name', siteName);
+
+      if (!siteName) {
         return res;
       }
 
-    // default site cookie attributes
-    const defaultCookieAttributes = {
-        secure: false, //secure: process.env.NODE_ENV === "production", // Only use secure in production
-        httpOnly: false,
-        sameSite: 'lax',
-        path: "/", // Ensure cookie is available on all paths
-        maxAge: 60 * 60 * 24 * 30, // 30 days
-      } as CookieAttributes;
+      const theme = this.config.themes.find((t) => t.name === siteName)?.theme || 'base';
+      debug.common('Middleware: theme', theme);
 
-    // Add theme to a cookie
-    res.cookies.set(THEME_KEY, theme, defaultCookieAttributes);
+      if (!theme) {
+          console.warn(`ThemeMiddleware: No theme found for site '${siteName}'.`);
+          return res;
+        }
 
-    // Log for debugging
-    debug.common("Middleware: Set theme cookie", theme, defaultCookieAttributes)
-    return res;
+      // default site cookie attributes
+      const defaultCookieAttributes = {
+          secure: false, //secure: process.env.NODE_ENV === "production", // Only use secure in production
+          httpOnly: false,
+          sameSite: 'lax',
+          path: "/", // Ensure cookie is available on all paths
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+        } as CookieAttributes;
+
+      // Add theme to a cookie
+      res.cookies.set(THEME_KEY, theme, defaultCookieAttributes);
+
+      // Log for debugging
+      debug.common("Middleware: Set theme cookie", theme, defaultCookieAttributes)
+      return res;
+    } catch (error) {
+      console.log('Theme middleware failed:');
+      console.log(error);
+      return res;
+    }
   };
+
+  protected disabled(req: NextRequest, res: NextResponse): boolean | undefined {
+    // ignore files
+    return req.nextUrl.pathname.includes('.') || super.disabled(req, res);
+  }
 }
