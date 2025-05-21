@@ -1,0 +1,76 @@
+﻿---
+ID: "830874a9-34f6-4c79-bd56-48c5efd79c9f"
+Parent: "0de95ae4-41ab-4d01-9eb0-67441b7c2450"
+Template: "515ec9e8-3402-43b3-bd52-38a52cc70d18"
+Path: /sitecore/content/Catalyst
+SharedFields:
+- ID: "102b58da-2a86-4953-b3cd-c9f91256b657"
+  Hint: PlaceholderSettingsFolder
+  Value: "{6AC979DF-79BE-48EB-9BCE-0A84024A40E0}"
+- ID: "1230d2cb-4948-4d43-8a3b-b39978f6f1b3"
+  Hint: Modules
+  Value: |
+    {02CD7086-1F87-41EC-B40F-B92C1226895B}
+    {7B81B847-1891-43B2-BC13-5047A62EC32A}
+    {D315A501-6503-4545-A5D8-B9FECBA1097D}
+    {7BAAA4FC-3051-442D-9BD2-AD720B655E0B}
+    {0DC2E395-4A95-4773-88CA-75B22A130849}
+    {4346A98A-D6E9-491E-A0ED-CD12F524CF4E}
+    {4CBC64BF-8116-48A1-ABAC-DB19103897A6}
+    {1B0A98C0-1801-44A0-85F2-845694FEAFF3}
+    {7574F439-0B48-48BE-BA6B-94B1A3CE01A3}
+    {D912C30C-7A98-4A8D-A094-611D9AF9605D}
+    {6DE1F4E9-815D-491D-923D-D5038100DBEE}
+- ID: "800dc4ed-0846-45ba-b112-19902af240f6"
+  Hint: SharedMediaLibrary
+  Value: "{5A920796-DADE-4BAA-9F28-DC44817F8348}"
+- ID: "853b245f-53e4-4ebe-bab5-299f9de314b6"
+  Hint: RenderingsFolder
+  Value: "{0CC70FE0-2EA2-4ECE-886A-0A2C6FCF0521}"
+- ID: "9c596379-f8d4-45d1-a064-cdf1ede2e7c7"
+  Hint: Templates
+  Value: "{BC76059F-F0CF-491A-8B11-C3CBC962DB82}"
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}"
+- ID: "b6953f8b-56d3-4c90-a6db-885786711e4a"
+  Hint: SettingsFolder
+  Value: "{2FCA4470-0406-4895-A95A-EC6EA43F2528}"
+- ID: "c5dbb136-3299-4835-a8ce-bca8b49ba3fa"
+  Hint: BranchesFolder
+  Value: "{049C75AF-D4F2-4BB0-B568-7799FF724EC2}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "8a4b4290-cedf-4e34-bb28-22b2029819aa"
+- ID: "e90a4413-c111-4951-9b6a-00c4ce7fb289"
+  Hint: MediaLibrary
+  Value: "{F11D01B9-A181-4528-B77D-DFC3C58F7231}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250430T150638Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{190B1C84-F1BE-47ED-AA41-F42193D9C8FC}"
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "8f951819-723b-45db-9de6-914209b51636"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250506T150234Z
