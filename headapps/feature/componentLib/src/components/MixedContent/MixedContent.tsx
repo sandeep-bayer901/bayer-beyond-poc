@@ -5,7 +5,8 @@ import {
   Image,
   ComponentParams, 
   ComponentRendering,
-  LinkField
+  LinkField,
+  RichText as JssRichText
 } from '@sitecore-content-sdk/nextjs';
 import { Button } from '@catalyst/foundation-global';
 import { IconArrowRight } from '@catalyst/foundation-icons';
@@ -44,8 +45,8 @@ export const MixedContentDefaultComponent = (props: MixedContentProps): JSX.Elem
           <Image />
         </div>
       <div className="mixed-content--content">
-        <h2 className="mixed-content--title">{props.fields?.Title?.value}</h2>
-        <p className="mixed-content--text">{props.fields?.Subtitle?.value}</p>
+        <h2 className="mixed-content--title"><JssRichText field={props.fields?.Title} /></h2>
+        <p className="mixed-content--text"><JssRichText field={props.fields?.Subtitle} /></p>
         <div className="mixed-content--buttons">
           <Button
                 variant="primary"
