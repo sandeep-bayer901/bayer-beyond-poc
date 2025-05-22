@@ -4,7 +4,8 @@ import {
   ImageField,
   LinkField,
   FileField,
-  TextField,
+  Field,
+  RichText as JssRichText,
   Image
 } from '@sitecore-content-sdk/nextjs';
 import { IconArrowRight } from "@catalyst/foundation-icons";
@@ -18,8 +19,8 @@ interface ComponentProps {
 
 export type HeroBannerProps = ComponentProps & {
   fields: {
-    Title?: TextField;
-    Subtitle?: TextField;
+    Title?: Field<string>;
+    Subtitle?: Field<string>;
     Button?: LinkField;
     Image?: ImageField;
     Video?: FileField;
@@ -49,12 +50,12 @@ export const HeroBanner = ({ fields }: HeroBannerProps): JSX.Element => {
 
   return (
     <section className={`hero-banner `}>
-      <p>Hero Banner</p>
       <div className="hero-banner--background">{background}</div>
       <div className="hero-banner--content">
         <div className="hero-banner--container">
-          <h1 className="hero-banner--title">{fields.Title?.value}</h1>
-          <p className="hero-banner--subtitle">{fields.Subtitle?.value}</p>
+          <h1 className="hero-banner--title"><JssRichText field={fields.Title}/></h1>
+          
+          <p className="hero-banner--subtitle"><JssRichText field={fields.Subtitle} /></p>
           {fields.Button && (
             <Button
               key={`hero-banner-button--${fields.Button.value?.text}`}
