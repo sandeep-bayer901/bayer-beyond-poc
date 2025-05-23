@@ -46,7 +46,7 @@ export const MixedContentDefaultComponent = (props: MixedContentProps): JSX.Elem
         </div>
       <div className="mixed-content--content">
         <h2 className="mixed-content--title"><JssRichText field={props.fields?.Title} /></h2>
-        <p className="mixed-content--text"><JssRichText field={props.fields?.Subtitle} /></p>
+        <div className="mixed-content--text"><JssRichText field={props.fields?.Subtitle} /></div>
         <div className="mixed-content--buttons">
           <Button
                 variant="primary"
@@ -81,8 +81,8 @@ export const DefaultVariant = (props: MixedContentProps): JSX.Element => {
             </div>
           )}
           <div className="mixed-content--content">
-            <h2 className="mixed-content--title">{props.fields.Title?.value}</h2>
-            <p className="mixed-content--text">{props.fields.Subtitle?.value}</p>
+          <h2 className="mixed-content--title"><JssRichText field={props.fields?.Title} /></h2>
+          <div className="mixed-content--text"><JssRichText field={props.fields?.Subtitle} /></div>
             <div className="mixed-content--buttons">
               {props.fields.Buttons &&
                 props.fields.Buttons.map((button) => (
