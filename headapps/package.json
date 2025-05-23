@@ -5,7 +5,8 @@
     "workspaces": [
         "sites/*",
         "feature/*",
-        "foundation/*"
+        "foundation/*",
+        "Empty"
     ],
     "scripts": {
         "build": "turbo run build",

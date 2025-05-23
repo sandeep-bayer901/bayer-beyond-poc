@@ -55,7 +55,7 @@ export const HeroBanner = ({ fields }: HeroBannerProps): JSX.Element => {
         <div className="hero-banner--container">
           <h1 className="hero-banner--title"><JssRichText field={fields.Title}/></h1>
           
-          <p className="hero-banner--subtitle"><JssRichText field={fields.Subtitle} /></p>
+          <div className="hero-banner--subtitle"><JssRichText field={fields.Subtitle} /></div>
           {fields.Button && (
             <Button
               key={`hero-banner-button--${fields.Button.value?.text}`}
