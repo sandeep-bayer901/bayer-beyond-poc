@@ -15,7 +15,8 @@
         "start:production": "cd ./sites/corp && npm install --prefix=../.. -loglevel info && cd ../.. && npx turbo run build --filter=app-corp && turbo run start",
         "start:corp": "cd ./sites/corp && npm install --prefix=../.. -loglevel info && cd ../.. && npx turbo run build --filter=app-corp && turbo run start --filter=app-corp",
         "start:net": "cd ./sites/net && npm install --prefix=../.. -loglevel info && cd ../.. && npx turbo run build --filter=app-net && turbo run start && cd ./sites/net && npm run next:start",
-        "bootstrap": "turbo run bootstrap"
+        "bootstrap": "turbo run bootstrap",
+        "dev:corp": "cd sites/corp && cross-env NODE_OPTIONS='--inspect' next dev --experimental-https"
     },
     "devDependencies": {
         "turbo": "1.5.5"
