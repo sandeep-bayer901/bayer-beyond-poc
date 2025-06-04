@@ -3,6 +3,9 @@ import { BYOCWrapper, NextjsJssComponent, FEaaSWrapper } from '@sitecore-content
 import { Form } from '@sitecore-content-sdk/nextjs';
 // end of built-in components
 
+// This needs to be automated!
+import { HeroBanner, MixedContent } from '@catalyst/feature-componentlib';
+
 // Components imported from the app itself
 import * as CdpPageView from 'src/components/CdpPageView';
 import * as ColumnSplitter from 'src/components/ColumnSplitter';
@@ -40,6 +43,8 @@ export const componentMap = new Map<string, NextjsJssComponent>([
   ['RowSplitter', RowSplitter],
   ['SitecoreStyles', SitecoreStyles],
   ['Title', Title],
+  ['HeroBanner', HeroBanner],
+  ['MixedContent', MixedContent],
 ]);
 
 export default componentMap;

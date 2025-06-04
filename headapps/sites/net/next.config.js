@@ -27,7 +27,6 @@ const nextConfig = {
   // can be served from the Next.js Image Optimization API
   // see https://nextjs.org/docs/app/api-reference/components/image#remotepatterns
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -40,23 +39,10 @@ const nextConfig = {
         port: '',
       },
       {
-        protocol: 'http',
-        hostname: 'bayer-local-*',
-        port: '',
-        pathname:'/**'
-      },
-      {
         protocol: 'https',
         hostname: '*.vercel.app',
-        port: '',
-        pathname:'/**'
+        pathname: '/-/**',
       },
-      {
-        protocol: 'https',
-        hostname: '*.sitecore.io',
-        port: '',
-        pathname: '/**',
-      }
     ],
   },
 
@@ -115,6 +101,9 @@ const nextConfig = {
       '@sass': path.join(process.cwd(), './src/assets', 'sass'),
       '@fontawesome': path.join(process.cwd(), './node_modules', 'font-awesome'),
     }).getImporter(),
+    // temporary measure until new versions of bootstrap and font-awesome released
+    quietDeps: true,    
+    silenceDeprecations: ["import", "legacy-js-api"],
   },
 };
 

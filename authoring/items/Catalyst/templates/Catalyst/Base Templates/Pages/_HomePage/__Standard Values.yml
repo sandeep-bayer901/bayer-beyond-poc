@@ -1,0 +1,37 @@
+﻿---
+ID: "a98b8992-51a6-45c4-bbea-568bccf5fbb4"
+Parent: "9193e0bc-c4c1-416f-9bfc-281089498e85"
+Template: "9193e0bc-c4c1-416f-9bfc-281089498e85"
+Path: /sitecore/templates/Project/Catalyst/Base Templates/Pages/_HomePage/__Standard Values
+SharedFields:
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{027F9EBD-2FD7-4D24-84E2-DBE2023422FF}">
+        <p
+          uid="{E4062332-52A8-43D8-9D78-C9C290A36F82}"
+          key="main"
+          md="{3D2F4B63-7F2C-477B-B67E-F79256151D88}" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20220810T142527Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "7956d647-522a-4da5-bf8b-70d5c2739646"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20221220T160007Z

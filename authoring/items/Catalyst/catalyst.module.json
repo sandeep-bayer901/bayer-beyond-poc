@@ -1,0 +1,51 @@
+{
+  "namespace": "Project.Catalyst",
+  "items": {
+    "includes": [
+      {
+        "name": "scripts",
+        "path": "/sitecore/system/Modules/PowerShell/Script Library/Catalyst"
+      },
+      {
+        "name": "renderings",
+        "path": "/sitecore/layout/Renderings/Feature/Catalyst"
+      },
+      {
+        "name": "templates-foundation",
+        "path": "/sitecore/templates/Foundation/Catalyst"
+      },
+      {
+        "name": "templates-feature",
+        "path": "/sitecore/templates/Feature/Catalyst"
+      },
+      {
+        "name": "templates",
+        "path": "/sitecore/templates/Project/Catalyst"
+      },
+      {
+        "name": "brach templates",
+        "path": "/sitecore/templates/Branches/Project/Catalyst"
+      },
+      {
+        "name": "branch-feature",
+        "path":"/sitecore/templates/Branches/Feature/Catalyst"
+      },
+      {
+        "name": "settings-feature",
+        "path": "/sitecore/system/Settings/Feature/Catalyst"
+      },
+      {
+        "name": "settings-foundation",
+        "path": "/sitecore/system/Settings/Foundation/Catalyst"
+      },
+      {
+        "name": "settings-project",
+        "path": "/sitecore/system/Settings/Project/Catalyst"
+      },
+      {
+        "name": "content",
+        "path": "/sitecore/content/Catalyst"
+      }
+    ]
+  }
+}

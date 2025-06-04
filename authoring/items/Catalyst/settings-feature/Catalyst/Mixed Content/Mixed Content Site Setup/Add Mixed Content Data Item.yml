@@ -1,0 +1,41 @@
+﻿---
+ID: "706ae95d-a8b9-4ac6-a29d-2b1778017889"
+Parent: "03c12755-9b14-4e27-8fbf-e553e5fea55f"
+Template: "f609f86d-47b3-48bf-b70c-1910c57930b6"
+Path: /sitecore/system/Settings/Feature/Catalyst/Mixed Content/Mixed Content Site Setup/Add Mixed Content Data Item
+SharedFields:
+- ID: "7868e6bc-525c-4fce-ab8a-77da3e09b171"
+  Hint: Name
+  Value: Mixed Content
+- ID: "b6189baf-747c-4900-bbf9-f2d48a406861"
+  Hint: Location
+  Value: "{BBB7C932-4D65-418E-B22C-9C88193D0AEB}"
+- ID: "e62c28f0-9d3b-46e2-8bec-a5e120542499"
+  Hint: Template
+  Value: "{53B923CC-AA4B-45DD-9324-31E0670EF61D}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20221214T121350Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "a914d083-dbe6-4216-8100-8b3763b33ee8"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20221214T121509Z

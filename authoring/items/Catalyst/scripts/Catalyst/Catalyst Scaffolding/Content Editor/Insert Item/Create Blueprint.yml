@@ -1,0 +1,92 @@
+﻿---
+ID: "6828b6a6-cd5e-42f4-8b80-7939bb79ba73"
+Parent: "f4939ac5-bde7-45fb-a6b3-de7a9bf66de0"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: /sitecore/system/Modules/PowerShell/Script Library/Catalyst/Catalyst Scaffolding/Content Editor/Insert Item/Create Blueprint
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: office/32x32/window_star.png
+- ID: "1c76313e-3c8c-4807-a826-135d10c39299"
+  Hint: ShowRule
+  Value: |
+    <ruleset>
+      <rule
+        uid="{48386B7D-557F-499C-8ED8-0E33B26836BE}"
+        name="Parent is headless tenant and item is headless site">
+        <conditions>
+          <and
+            uid="2ED71519DFAA4172A1A0BFD8C42A9309">
+            <condition
+              id="{AF2FBD9A-DED2-42B5-B38D-BAC45D301296}"
+              uid="F238F525F4A74F30814DC6E2A392EBE0"
+              templateid="{515EC9E8-3402-43B3-BD52-38A52CC70D18}" />
+            <condition
+              id="{5DE6D53E-EA62-4D17-8BDD-FEBCD80AC07B}"
+              uid="A4CD19BCAD3740EAB2BAD67AF63426F4"
+              templateid="{7D1D342C-9BF6-40A0-8CB4-576A696FC788}" />
+          </and>
+        </conditions>
+      </rule>
+      <rule
+        uid="{E98E53C5-FA75-490B-BFA7-DBF4201AC316}"
+        name="Parent is headless tenant and item is headless site folder">
+        <conditions>
+          <and
+            uid="FBA67BD1FF544A1D8784518AFFEAB714">
+            <condition
+              id="{AF2FBD9A-DED2-42B5-B38D-BAC45D301296}"
+              uid="9EC2CA8DB9BE439E94B47466DD9B605F"
+              templateid="{515EC9E8-3402-43B3-BD52-38A52CC70D18}" />
+            <condition
+              id="{5DE6D53E-EA62-4D17-8BDD-FEBCD80AC07B}"
+              uid="708B665303D84FE7B925A98C2531662A"
+              templateid="{CE91FBD6-4D89-42C9-B5BC-2A670439E1FF}" />
+          </and>
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    Import-Function Validate-PowerShell
+    Import-Function Get-Component-Library-Site
+    
+    Test-PowerShell
+    
+    $ctx = gi .
+    $componentLibrarySiteItem = Get-Component-Library-Site $ctx
+    Import-Function Get-New-CatalystJSSSiteDialog
+    Import-Function New-Catalyst-JSSSite
+    $model = Get-New-CatalystJSSSiteDialog $componentLibrarySiteItem $ctx $true
+    New-Catalyst-JSSSite $model $true
+    
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "36214129-93a1-40d3-a52c-e271245a4a94"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20221119T210713Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\ramkumar.nambhi@valtech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\ramkumar.nambhi@valtech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "4cd9190e-b2d7-4764-ade4-4b40f6f9357b"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\ramkumar.nambhi@valtech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250506T123703Z

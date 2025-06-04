@@ -1,0 +1,44 @@
+﻿---
+ID: "f76e23ea-9401-4e2e-868f-01ca3d172087"
+Parent: "bdd71145-bb78-4011-9e90-c0b929008ad0"
+Template: "0a7aa373-5ed1-4e9b-9678-22d3c5faf6df"
+Path: /sitecore/templates/Branches/Project/Catalyst/Scaffolding/Catalyst Site/$name/Presentation/Partial Designs/Footer/Data/Address
+BranchID: "8204a950-cbaa-4d06-878b-11ced5ddc1ad"
+SharedFields:
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{4408DD99-867B-4A64-AD48-0914432251CB}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250416T153259Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "729034fc-24f3-40b7-8fa4-fb49d7de20dd"
+      Hint: Text
+      Value: |
+        Copyright &copy; Bayer AG
+        91 Quantum Loop
+        Z7X 3P1
+        Republic of Ideas
+        Made by Valtech Catalyst
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "22e610c3-077a-40a5-9751-11949bee02bf"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\miguel.minoldo@valtech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250521T132721Z

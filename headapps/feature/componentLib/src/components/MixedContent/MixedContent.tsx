@@ -1,12 +1,12 @@
-import React from "react";
+import React, { JSX } from "react";
 import {
-  Text,
   Field,
   ImageField,
-  NextImage,
+  Image,
   ComponentParams, 
   ComponentRendering,
-  LinkField
+  LinkField,
+  RichText as JssRichText
 } from '@sitecore-content-sdk/nextjs';
 import { Button } from '@catalyst/foundation-global';
 import { IconArrowRight } from '@catalyst/foundation-icons';
@@ -42,11 +42,11 @@ export const MixedContentDefaultComponent = (props: MixedContentProps): JSX.Elem
     <div
       className="mixed-content--container">
         <div className="mixed-content--image-wrapper">
-          <NextImage layout="intrinsic" />
+          <Image />
         </div>
       <div className="mixed-content--content">
-        <h2 className="mixed-content--title">{props.fields?.Title?.value}</h2>
-        <p className="mixed-content--text">{props.fields?.Subtitle?.value}</p>
+        <h2 className="mixed-content--title"><JssRichText field={props.fields?.Title} /></h2>
+        <div className="mixed-content--text"><JssRichText field={props.fields?.Subtitle} /></div>
         <div className="mixed-content--buttons">
           <Button
                 variant="primary"
@@ -74,16 +74,15 @@ export const DefaultVariant = (props: MixedContentProps): JSX.Element => {
         >
           {props.fields.Image && (
             <div className="mixed-content--image-wrapper">
-              <NextImage
+              <Image
                 field={props.fields.Image}
                 className="mixed-content--image"
-                layout="intrinsic"
               />
             </div>
           )}
           <div className="mixed-content--content">
-            <h2 className="mixed-content--title">{props.fields.Title?.value}</h2>
-            <p className="mixed-content--text">{props.fields.Subtitle?.value}</p>
+          <h2 className="mixed-content--title"><JssRichText field={props.fields?.Title} /></h2>
+          <div className="mixed-content--text"><JssRichText field={props.fields?.Subtitle} /></div>
             <div className="mixed-content--buttons">
               {props.fields.Buttons &&
                 props.fields.Buttons.map((button) => (
@@ -125,11 +124,9 @@ export const InvertedVariant = (props: MixedContentProps): JSX.Element => {
         >
           {props.fields.Image && (
             <div className="mixed-content--image-wrapper">
-              <NextImage
+              <Image
                 field={props.fields.Image}
                 className="mixed-content--image"
-                layout="intrinsic"
-
               />
             </div>
           )}
