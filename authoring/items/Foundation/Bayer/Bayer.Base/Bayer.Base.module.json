@@ -1,0 +1,175 @@
+{
+  "namespace": "Bayer.Base",
+  "items": {
+    "includes": [
+      {
+        "name": "Templates.Foundation",
+        "path": "/sitecore/templates/Foundation/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Templates.Feature",
+        "path": "/sitecore/templates/Feature/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Templates.Project",
+        "path": "/sitecore/templates/Project/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Branches.Foundation",
+        "path": "/sitecore/templates/branches/Foundation/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Branches.Feature",
+        "path": "/sitecore/templates/branches/Feature/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Branches.Project",
+        "path": "/sitecore/templates/branches/Project/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Renderings.Foundation",
+        "path": "/sitecore/layout/Renderings/Foundation/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Renderings.Feature",
+        "path": "/sitecore/layout/Renderings/Feature/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Renderings.Project",
+        "path": "/sitecore/layout/Renderings/Project/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "PlaceholderSettings.Foundation",
+        "path": "/sitecore/layout/placeholder settings/Foundation/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "PlaceholderSettings.Feature",
+        "path": "/sitecore/layout/placeholder settings/Feature/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "PlaceholderSettings.Project",
+        "path": "/sitecore/layout/placeholder settings/Project/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Layouts.Project",
+        "path": "/sitecore/layout/layouts/Project/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Media.Foundation",
+        "path": "/sitecore/Media Library/Foundation",
+        "rules": [
+          {
+            "path": "/Bayer",
+            "scope": "SingleItem",
+            "allowedPushOperations": "createAndUpdate"
+          },
+          {
+            "path": "*",
+            "scope": "ignored"
+          }
+        ]
+      },
+      {
+        "name": "Media.Feature",
+        "path": "/sitecore/Media Library/Feature",
+        "rules": [
+          {
+            "path": "/Bayer",
+            "scope": "SingleItem",
+            "allowedPushOperations": "createAndUpdate"
+          },
+          {
+            "path": "*",
+            "scope": "ignored"
+          }
+        ]
+      },
+      {
+        "name": "Media.Project",
+        "path": "/sitecore/Media Library/Project",
+        "rules": [
+          {
+            "path": "/Bayer",
+            "scope": "SingleItem",
+            "allowedPushOperations": "createAndUpdate"
+          },
+          {
+            "path": "*",
+            "scope": "ignored"
+          }
+        ]
+      },
+      {
+        "name": "Settings.Foundation",
+        "path": "/sitecore/system/Settings/Foundation",
+        "rules": [
+          {
+            "path": "/Bayer",
+            "scope": "SingleItem",
+            "allowedPushOperations": "createAndUpdate"
+          },
+          {
+            "path": "*",
+            "scope": "ignored"
+          }
+        ]
+      },
+      {
+        "name": "Settings.Feature",
+        "path": "/sitecore/system/Settings/Feature",
+        "rules": [
+          {
+            "path": "/Bayer",
+            "scope": "SingleItem",
+            "allowedPushOperations": "createAndUpdate"
+          },
+          {
+            "path": "*",
+            "scope": "ignored"
+          }
+        ]
+      },
+      {
+        "name": "Settings.Project",
+        "path": "/sitecore/system/Settings/Project",
+        "rules": [
+          {
+            "path": "/Bayer",
+            "scope": "SingleItem",
+            "allowedPushOperations": "createAndUpdate"
+          },
+          {
+            "path": "*",
+            "scope": "ignored"
+          }
+        ]
+      }
+    ]
+  }
+}

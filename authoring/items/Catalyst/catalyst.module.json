@@ -28,7 +28,7 @@
       },
       {
         "name": "branch-feature",
-        "path":"/sitecore/templates/Branches/Feature/Catalyst"
+        "path": "/sitecore/templates/Branches/Feature/Catalyst"
       },
       {
         "name": "settings-feature",
@@ -41,11 +41,11 @@
       {
         "name": "settings-project",
         "path": "/sitecore/system/Settings/Project/Catalyst"
-      },
-      {
-        "name": "content",
-        "path": "/sitecore/content/Catalyst"
       }
+      //,{
+      //   "name": "content",
+      //   "path": "/sitecore/content/Bayer/Bayer Catalyst"
+      // }
     ]
   }
 }
