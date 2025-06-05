@@ -75,6 +75,18 @@
         "allowedPushOperations": "createAndUpdate"
       },
       {
+        "name": "Layouts.Foundation",
+        "path": "/sitecore/layout/layouts/Foundation/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
+        "name": "Layouts.Feature",
+        "path": "/sitecore/layout/layouts/Feature/Bayer",
+        "scope": "SingleItem",
+        "allowedPushOperations": "createAndUpdate"
+      },
+      {
         "name": "Layouts.Project",
         "path": "/sitecore/layout/layouts/Project/Bayer",
         "scope": "SingleItem",
