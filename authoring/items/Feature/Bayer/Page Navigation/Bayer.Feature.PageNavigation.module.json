@@ -1,0 +1,28 @@
+{
+  "namespace": "Bayer.Feature.PageNavigation",
+  "references": ["Bayer.Base"],
+  "items": {
+    "includes": [
+      {
+        "name": "Templates",
+        "path": "/sitecore/templates/Feature/Bayer/Page Navigation"
+      },
+      {
+        "name": "Branches",
+        "path": "/sitecore/templates/Branches/Feature/Bayer/Page Navigation"
+      },
+      {
+        "name": "Placeholder Settings",
+        "path": "/sitecore/layout/Placeholder Settings/Feature/Bayer/Page Navigation"
+      },
+      {
+        "name": "Renderings",
+        "path": "/sitecore/layout/Renderings/Feature/Bayer/Page Navigation"
+      },
+      {
+        "name": "Settings",
+        "path": "/sitecore/system/Settings/Feature/Bayer/Page Navigation"
+      }
+    ]
+  }
+}

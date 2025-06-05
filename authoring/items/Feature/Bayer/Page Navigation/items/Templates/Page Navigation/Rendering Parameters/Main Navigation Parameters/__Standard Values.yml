@@ -1,0 +1,34 @@
+﻿---
+ID: "c2ae7f6c-e55b-4769-b00d-f129a0544a6c"
+Parent: "fcbe5b91-f025-4a15-ac2a-0201f08f7707"
+Template: "fcbe5b91-f025-4a15-ac2a-0201f08f7707"
+Path: /sitecore/templates/Feature/Bayer/Page Navigation/Rendering Parameters/Main Navigation Parameters/__Standard Values
+SharedFields:
+- ID: "b20124b2-820e-4f89-a310-a260656f1a55"
+  Hint: LevelFrom
+  Value: "{1BB88840-5FB3-4353-AD8D-81136F6FF75A}"
+- ID: "d3ae28e6-b489-4ab9-8c28-5b2bd0161228"
+  Hint: LevelTo
+  Value: "{A59325BB-5A27-46F9-8110-9D499715F3BE}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20211012T120926Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\JssImport
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "692b957d-e429-47be-bab0-196c03104550"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\nagaraju.chatta@valtech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250605T105520Z
